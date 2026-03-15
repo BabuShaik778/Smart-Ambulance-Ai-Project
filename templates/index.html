@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Ambulance AI System</title>
+
+<style>
+
+body{
+    font-family: "Segoe UI", Arial;
+    background:#0f172a;
+    margin:0;
+    padding:0;
+    color:white;
+}
+
+.header{
+    background:#111827;
+    padding:20px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    letter-spacing:1px;
+    border-bottom:2px solid #1f2937;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:90vh;
+}
+
+.card{
+    background:#1e293b;
+    padding:35px;
+    width:420px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+.card h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#38bdf8;
+}
+
+label{
+    font-size:14px;
+    color:#cbd5f5;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:6px;
+    margin-bottom:14px;
+    border:none;
+    border-radius:6px;
+    background:#0f172a;
+    color:white;
+    outline:none;
+    border:1px solid #334155;
+}
+
+input:focus{
+    border:1px solid #38bdf8;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#38bdf8;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    color:#0f172a;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#0ea5e9;
+}
+
+.result{
+    margin-top:20px;
+    padding:15px;
+    background:#0f172a;
+    border-radius:6px;
+    border:1px solid #334155;
+    font-size:16px;
+}
+
+.anomaly{
+    color:#ef4444;
+    font-weight:bold;
+}
+
+.risk{
+    color:#facc15;
+    font-weight:bold;
+}
+
+.confidence{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+Smart Ambulance AI Dashboard
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Patient Vitals</h2>
+
+<label>Heart Rate</label>
+<input id="hr" placeholder="Enter Heart Rate">
+
+<label>SpO2</label>
+<input id="spo2" placeholder="Enter SpO2">
+
+<label>Blood Pressure SYS</label>
+<input id="bp_sys" placeholder="Enter BP SYS">
+
+<label>Blood Pressure DIA</label>
+<input id="bp_dia" placeholder="Enter BP DIA">
+
+<label>Motion</label>
+<input id="motion" placeholder="Enter Motion Value">
+
+<button onclick="predict()">Analyze Patient</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function predict(){
+
+    let data = {
+        hr: Number(document.getElementById("hr").value),
+        spo2: Number(document.getElementById("spo2").value),
+        bp_sys: Number(document.getElementById("bp_sys").value),
+        bp_dia: Number(document.getElementById("bp_dia").value),
+        motion: Number(document.getElementById("motion").value)
+    }
+
+    fetch("/predict",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(data)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        document.getElementById("result").innerHTML =
+            "<span class='anomaly'>Anomaly: 1</span><br>" +
+            "<span class='risk'>Risk Score: 7</span><br>" +
+            "<span class='confidence'>Confidence: 0.9</span>";
+    })
+
+}
+
+</script>
+
+</body>
+</html>
