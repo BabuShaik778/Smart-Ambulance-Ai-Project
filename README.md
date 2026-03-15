@@ -54,7 +54,7 @@ SmartAmbulanceAI/
 
 # 1.Clone the repository: #
 
-git clone https://github.com/yourusername/SmartAmbulanceAI.git
+git clone https://github.com/BabuShaik778/SmartAmbulanceAI.git
 cd SmartAmbulanceAI
 
 
