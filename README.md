@@ -1,4 +1,4 @@
-# Smart-Ambulance-Ai-Project
+
 # Smart Ambulance AI Monitoring System #
 
 Real-time patient monitoring for ambulances using ML-based anomaly detection and risk scoring. The system detects early warning signs, calculates a risk score, and provides a confidence level to assist clinical decision-making.
